@@ -26,8 +26,8 @@ private static final long serialVersionUID = 1L;
 // Returns true if this map should remove its eldest entry. This method is invoked by put and putAll after inserting a new entry into the map. 
 @Override
 protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-boolean ifRemove = this.size() > CACHE_SIZE;
-return ifRemove;
+    boolean ifRemove = this.size() > CACHE_SIZE;
+    return ifRemove;
 }
 
 };
@@ -36,19 +36,19 @@ return ifRemove;
 // cache, it is replaced by the new entry. If the cache is full, the LRU (least recently used) entry is removed from the cache.
 // it has to be synchronized, since we are deleting old elements and updating as per access order. Under multiple threads - it will be an issue.
 public synchronized void put(K key, V value) {
-if (value == null)
-return;
+	if (value == null)
+	return;
 else
-cache.put(key, value);
+	cache.put(key, value);
 }
 
 // Retrieves an entry from the cache. The retrieved entry becomes the MRU (most recently used) entry.
 public synchronized V get(K key) {
-return cache.get(key);
+	return cache.get(key);
 }
 
 public synchronized void clear() {
-cache.clear();
+	cache.clear();
 }
 
 

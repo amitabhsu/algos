@@ -20,7 +20,10 @@ class MaxComparator implements Comparator {
 
 public class Median {
     
-    public static int getMedian(int ip, int m, PriorityQueue l_heap, PriorityQueue r_heap) {
+    //l_heap is max heap, which means root is greater than all the rest
+	//r_heap is min heap, which means root is smallest than all the rest
+	//http://www.tutorialspoint.com/data_structures_algorithms/heap_data_structure.htm
+	public static int getMedian(int ip, int m, PriorityQueue l_heap, PriorityQueue r_heap) {
         
         int diff = l_heap.size() - r_heap.size();
         //System.out.println("\n\nip : " + ip);
@@ -72,7 +75,7 @@ public class Median {
     
     public static void printMedian(int[] arr, int n) {
         
-        MaxComparator max_comparator = new MaxComparator();
+        MaxComparator max_comparator  = new MaxComparator();
         PriorityQueue<Integer> l_heap = new PriorityQueue<Integer>(n/2, max_comparator);
         PriorityQueue<Integer> r_heap = new PriorityQueue<Integer>();
         int m = 0;

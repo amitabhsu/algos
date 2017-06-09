@@ -8,19 +8,58 @@ public class LinkedListDriver {
 		LinkedList ll1 = new LinkedList();
 		LinkedList ll2 = new LinkedList();
 		ArrayList<Integer> arrList = new ArrayList<>();
-		for (int i = 2; i <= 10; i += 2)
-			arrList.add(i);
+		// for (int i = 1; i <= 2; i++)
+		arrList.add(2);
+		arrList.add(4);
+		arrList.add(3);
 		createLL(arrList, ll1);
 		printLL(ll1);
-		System.out.println("***************************");
-		arrList.removeAll(arrList);
-		for (int i = 1; i <= 10; i += 2)
-			arrList.add(i);
-		createLL(arrList, ll2);
+		ArrayList<Integer> arrList1 = new ArrayList<>();
+		arrList1.add(5);
+		arrList1.add(6);
+		arrList1.add(4);
+		createLL(arrList1, ll2);
 		printLL(ll2);
-		System.out.println("***************************");
-		LinkedList ll = mergeLL(ll1, ll2);
-		printLL(ll);
+		addTwoNumbers(ll1.head, ll2.head);
+		// removeElements(ll1.head,2);
+		/*
+		 * System.out.println("***************************");
+		 * arrList.removeAll(arrList); for (int i = 1; i <= 10; i += 2)
+		 * arrList.add(i); createLL(arrList, ll2); printLL(ll2);
+		 * System.out.println("***************************"); LinkedList ll =
+		 * mergeLL(ll1, ll2); printLL(ll);
+		 */
+
+	}
+
+	public static LinkedListNode addTwoNumbers(LinkedListNode l1, LinkedListNode l2) {
+		int carry = 0;
+		int sum = 0;
+		LinkedListNode head = null;
+		LinkedListNode prev = null;
+		while (l1 != null || l2 != null) {
+			if (l1 != null) {
+				sum += l1.data;
+				l1 = l1.next;
+			}
+			if (l2 != null) {
+				sum += l2.data;
+				l2 = l2.next;
+			}
+			LinkedListNode node = new LinkedListNode((sum + carry) % 10);
+			if (head == null) {
+				head = node;
+			} else {
+				prev.next = node;
+			}
+			prev = node;
+			carry = (sum + carry) / 10;
+		}
+		if (carry == 1) {
+			LinkedListNode n = new LinkedListNode(1);
+			prev.next = n;
+		}
+		return head;
 
 	}
 
@@ -108,6 +147,28 @@ public class LinkedListDriver {
 			System.out.println(cur.data);
 			cur = cur.next;
 		}
+	}
+
+	public static LinkedListNode removeElements(LinkedListNode head, int val) {
+		if (head == null)
+			return head;
+		while (head != null && head.data == val) {
+			head = head.next;
+			// return head;
+		}
+		LinkedListNode cur = head;
+		while (cur != null) {
+			while (cur.data == val && cur.next != null) {
+				cur.data = cur.next.data;
+				cur.next = cur.next.next;
+			}
+			if (cur.data == val && cur.next == null) {
+				cur = null;
+				break;
+			}
+			cur = cur.next;
+		}
+		return head;
 	}
 
 }

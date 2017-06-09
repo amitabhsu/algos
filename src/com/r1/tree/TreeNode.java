@@ -1,4 +1,4 @@
-package com.r1.testjava8;
+package com.r1.tree;
 
 class TreeNode {
 	int val;
